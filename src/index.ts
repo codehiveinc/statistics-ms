@@ -1,12 +1,12 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
+import routes from './infraestructure/api/routes';
+import bodyParser from 'body-parser';
 
 const app = express();
-const port = 3000;
+app.use(bodyParser.json());
+app.use('/api', routes);   
 
-app.get('/', (req: Request, res: Response) => {
-    res.send('Hello, World!');
-});
-
-app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
